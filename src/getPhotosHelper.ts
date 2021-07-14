@@ -21,10 +21,9 @@ function trimPhotoData(bigPhotoData: Photo[]) {
 }
 
 async function getDataFromPage(page: number, url: string) {
-  const pageUrl = `${url}+${page ? "&page=" + page : ""}`;
+  const pageUrl = `${url}${page ? "&page=" + page : ""}`;
   const { data } = await axios.get(pageUrl);
   const photos = trimPhotoData(data.photos);
-  console.log(photos);
   return photos;
 }
 
@@ -41,14 +40,17 @@ export async function getPhotosData(
   if (!pageStart && !pageEnd) {
     photos = await getDataFromPage(page, url);
   } else {
+    console.log("Here with " + pageStart + " " + pageEnd);
     let i = Math.max(pageStart, 1);
     let endFound = false;
     if (!pageEnd) {
       while (!endFound) {
         let photoData = await getDataFromPage(i, url);
         photos = photos.concat(photoData);
-        if (!photoData) {
+        console.log(photoData);
+        if (photoData.length == 0) {
           endFound = true;
+          console.log("End FOUND");
         }
         i += 1;
       }
@@ -56,7 +58,7 @@ export async function getPhotosData(
       while (i <= pageEnd && !endFound) {
         let photoData = await getDataFromPage(i, url);
         photos = photos.concat(photoData);
-        if (!photoData) {
+        if (photoData.length == 0) {
           endFound = true;
         }
         i += 1;
