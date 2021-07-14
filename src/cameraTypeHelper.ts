@@ -1,4 +1,4 @@
-const enum CuriosityCameras {
+export const enum Cameras {
   FHAZ = "FHAZ",
   RHAZ = "RHAZ",
   MAST = "MAST",
@@ -6,24 +6,8 @@ const enum CuriosityCameras {
   MAHLI = "MAHLI",
   MARDI = "MARDI",
   NAVCAM = "NAVCAM",
-}
-
-const enum OpportunityCameras {
-  FHAZ = "FHAZ",
-  RHAZ = "RHAZ",
-  NAVCAM = "NAVCAM",
   PANCAM = "PANCAM",
   MINITES = "MINITES",
-}
-const enum SpiritCameras {
-  FHAZ = "FHAZ",
-  RHAZ = "RHAZ",
-  NAVCAM = "NAVCAM",
-  PANCAM = "PANCAM",
-  MINITES = "MINITES",
-}
-
-const enum PerseveranceCameras {
   EDL_RUCAM = "EDL_RUCAM",
   EDL_DDCAM = "EDL_DDCAM",
   EDL_PUCAM1 = "EDL_PUCAM1",
@@ -41,4 +25,4 @@ const enum PerseveranceCameras {
   SHERLOC_WATSON = "SHERLOC_WATSON",
   SUPERCAM_RMI = "SUPERCAM_RMI",
   LCAM = "LCAM",
-}
+};

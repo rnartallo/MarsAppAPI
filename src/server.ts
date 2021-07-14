@@ -1,4 +1,5 @@
 import express from "express";
+import { getPhotosData } from "./getPhotosHelper";
 import { getRovers } from "./getRoverHelper";
 
 require('dotenv').config()
@@ -13,6 +14,15 @@ router.get('/test', (req, res) => res.send('Hello world !'));
 router.get('/rovers', async (req,res) => {
     const data = await getRovers();
     res.send(data)});
+
+function postToCameraPath(rover:string,camera:string){
+    router.get(`/rovers/${rover}/camera/${camera}`,async (req,res)=>{
+        const data = await getPhotosData(rover,camera);
+        res.send(data)
+    })
+}
+
+postToCameraPath("Curiosity","FHAZ")
 app.use('/', router);
 
 app.listen(port, () => {
