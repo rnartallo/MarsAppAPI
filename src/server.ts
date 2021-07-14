@@ -17,12 +17,15 @@ router.get('/rovers', async (req,res) => {
 
 function postToCameraPath(rover:string,camera:string){
     router.get(`/rovers/${rover}/camera/${camera}`,async (req,res)=>{
-        const data = await getPhotosData(rover,camera);
+        let {sol, page, pageStart, pageEnd} = req.query;
+        sol = sol?? '1000';
+        pageStart = pageStart?? '0';
+        const data = await getPhotosData(rover=rover,camera,Number(sol),Number(page),Number(pageStart), pageEnd);
         res.send(data)
     })
 }
 
-postToCameraPath("Curiosity","FHAZ")
+postToCameraPath("Curiosity","MAST")
 app.use('/', router);
 
 app.listen(port, () => {
