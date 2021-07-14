@@ -17,9 +17,10 @@ router.get('/rovers', async (req,res) => {
 
 function postToCameraPath(rover:string,camera:string){
     router.get(`/rovers/${rover}/camera/${camera}`,async (req,res)=>{
-        let {sol, page} = req.query;
-        sol = sol? sol: '1000';
-        const data = await getPhotosData(rover=rover,camera,Number(sol),Number(page));
+        let {sol, page, pageStart, pageEnd} = req.query;
+        sol = sol?? '1000';
+        pageStart = pageStart?? '0';
+        const data = await getPhotosData(rover=rover,camera,Number(sol),Number(page),Number(pageStart), pageEnd);
         res.send(data)
     })
 }
