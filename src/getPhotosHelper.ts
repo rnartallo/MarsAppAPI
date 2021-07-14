@@ -1,18 +1,23 @@
 import axios from "axios";
 
 type Photo = {
-  id: number,
-  sol: number,
-  img_src: string,
-  earth_date: string,
+  id: number;
+  sol: number;
+  img_src: string;
+  earth_date: string;
+};
+
+function trimPhoto(photo: Photo): Photo {
+  return {
+    id: photo.id,
+    sol: photo.sol,
+    img_src: photo.img_src,
+    earth_date: photo.earth_date,
+  };
 }
 
-function trimPhoto (photo: Photo): Photo {
-  return {id: photo.id,sol: photo.sol,img_src: photo.img_src,earth_date: photo.earth_date}
-}
-
-function trimPhotoData (bigPhotoData: Photo[]){
-  return bigPhotoData.map(photo => trimPhoto(photo))
+function trimPhotoData(bigPhotoData: Photo[]) {
+  return bigPhotoData.map((photo) => trimPhoto(photo));
 }
 
 export async function getPhotosData(
