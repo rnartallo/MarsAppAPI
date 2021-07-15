@@ -22,6 +22,7 @@ function trimPhotoData(bigPhotoData: Photo[]) {
 
 async function getDataFromPage(page: number, url: string) {
   const pageUrl = `${url}${page ? "&page=" + page : ""}`;
+  console.log(pageUrl);
   const { data } = await axios.get(pageUrl);
   const photos = trimPhotoData(data.photos);
   return photos;
