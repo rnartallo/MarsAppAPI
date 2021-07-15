@@ -1,3 +1,24 @@
+export type Rover = {
+  name: string;
+  cameras: Camera[];
+};
+
+export type Camera = {
+  name: string;
+  full_name: string;
+};
+
+export function trimCamera(camera: Camera): Camera {
+  return {
+    name: camera.name,
+    full_name: camera.full_name,
+  };
+}
+
+export function trimCameraData(bigCameraData: Camera[]) {
+  return bigCameraData.map((camera) => trimCamera(camera));
+}
+
 export const enum Cameras {
   FHAZ = "FHAZ",
   RHAZ = "RHAZ",
@@ -25,4 +46,4 @@ export const enum Cameras {
   SHERLOC_WATSON = "SHERLOC_WATSON",
   SUPERCAM_RMI = "SUPERCAM_RMI",
   LCAM = "LCAM",
-};
+}

@@ -1,7 +1,7 @@
 import express from "express";
+import { Rover, Camera, trimCameraData } from "./cameraTypeHelper";
 import { getPhotosData } from "./getPhotosHelper";
 import { getRovers } from "./getRoverHelper";
-
 require("dotenv").config();
 
 const app = express();
@@ -16,7 +16,7 @@ router.get("/rovers", async (req, res) => {
   res.send(data);
 });
 
-router.get(`/rovers/:roverName/camera/:cameraName`, async (req, res) => {
+router.get("/rovers/:roverName/camera/:cameraName", async (req, res) => {
   let { sol, page, pagestart, pageend } = req.query;
   let { roverName, cameraName } = req.params;
   sol = sol ?? "1000";
@@ -30,6 +30,19 @@ router.get(`/rovers/:roverName/camera/:cameraName`, async (req, res) => {
     pageend
   );
   res.send(data);
+});
+
+router.get("/rovers/:roverName/cameras", async (req, res) => {
+  const { roverName } = req.params;
+  const data = await getRovers();
+  const roverList: Rover[] = data.rovers;
+  for (var rover of roverList) {
+    if (rover.name == roverName) {
+      let cameraList: Camera[] = rover.cameras;
+      const trimmedCameraList: Camera[] = trimCameraData(cameraList);
+      res.send(trimmedCameraList);
+    }
+  }
 });
 app.use("/", router);
 
