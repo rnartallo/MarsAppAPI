@@ -4,6 +4,7 @@ import { getPhotosData } from "./getPhotosHelper";
 import { getRovers } from "./getRoverHelper";
 import cors from "cors";
 import getMission from "./getMissionHelper";
+import getSolLog from "./getSolHelper";
 require("dotenv").config();
 
 const app = express();
@@ -39,6 +40,12 @@ router.get("/rovers/:rovername", async (req, res) => {
   const data = await getMission(rovername);
   res.send(data);
 });
+
+// router.get("/rovers/:rovername/:sol", async (req, res) => {
+//   let { rovername, sol } = req.params;
+//   const data = await getSolLog(rovername, Number(sol));
+//   res.send(data);
+// });
 
 router.get("/rovers/:roverName/cameras", async (req, res) => {
   const { roverName } = req.params;
