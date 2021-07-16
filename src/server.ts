@@ -2,11 +2,12 @@ import express from "express";
 import { Rover, Camera, trimCameraData } from "./cameraTypeHelper";
 import { getPhotosData } from "./getPhotosHelper";
 import { getRovers } from "./getRoverHelper";
+import cors from "cors";
 require("dotenv").config();
 
 const app = express();
-const port = 8000;
-
+const port = 7000;
+app.use(cors());
 app.use(express.json());
 const router = express.Router();
 router.get("/test", (req, res) => res.send("Hello world !"));
