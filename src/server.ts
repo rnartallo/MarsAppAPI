@@ -3,6 +3,7 @@ import { Rover, Camera, trimCameraData } from "./cameraTypeHelper";
 import { getPhotosData } from "./getPhotosHelper";
 import { getRovers } from "./getRoverHelper";
 import cors from "cors";
+import getMission from "./getMissionHelper";
 require("dotenv").config();
 
 const app = express();
@@ -30,6 +31,12 @@ router.get("/rovers/:roverName/camera/:cameraName", async (req, res) => {
     Number(pagestart),
     pageend
   );
+  res.send(data);
+});
+
+router.get("/rovers/:rovername", async (req, res) => {
+  let { rovername } = req.params;
+  const data = await getMission(rovername);
   res.send(data);
 });
 
