@@ -41,11 +41,12 @@ router.get("/rovers/:rovername", async (req, res) => {
   res.send(data);
 });
 
-// router.get("/rovers/:rovername/:sol", async (req, res) => {
-//   let { rovername, sol } = req.params;
-//   const data = await getSolLog(rovername, Number(sol));
-//   res.send(data);
-// });
+router.get("/:rovername/:sol", async (req, res) => {
+  let { rovername, sol } = req.params;
+  console.log(sol)
+  const data = await getSolLog(rovername, Number(sol));
+  res.send(data);
+});
 
 router.get("/rovers/:roverName/cameras", async (req, res) => {
   const { roverName } = req.params;
